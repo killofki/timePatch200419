@@ -262,7 +262,9 @@ inputTime .onclick = evt => {
 function setFrom( text ) { 
 	let matched = text .matchAll( timeRule ) 
 	let [[ all, hh, mm, ss ]] = matched 
+	
 	fromTime = getHHMMSS( hh, mm, ss ) 
+	
 	fromValue .innerHTML = HHMMSS( fromTime ) 
 	
 	return fromValue .innerHTML 
