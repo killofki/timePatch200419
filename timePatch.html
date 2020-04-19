@@ -225,6 +225,14 @@ let outputTime = $ ` #outputTime `
 
 console .log({ inputTime, outputTime }) 
 
+inputTime .onclick = evt => { 
+	console .log( evt ) 
+	let { srcElement } = evt 
+	let { value } = srcElement 
+	
+	console .log( value ) 
+	} 
+
 outputTime .oonclick = q => { 
 // outputTime .onclick = q => { 
 	} // -- outputTime .onclick 
