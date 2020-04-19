@@ -239,10 +239,8 @@ function patchTime( text ) {
 	let matches = text .match( /.*([\n\r]|$)/g ) 
 	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
 	
-	let now = new Date() 
-	setHHMMSS( now, 0, 0, 0 ) 
-	
-	return // 
+	let zero = new Date() 
+	setHHMMSS( zero, 0, 0, 0 ) 
 	
 	for ( let line of matches ) { 
 		let founds = line .matchAll( timeRule ) 
