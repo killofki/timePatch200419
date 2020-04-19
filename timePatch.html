@@ -23,10 +23,6 @@ textarea#outputTime {
 
 <textarea 
 		id="outputTime" 
-		onclick=" 
-			execCommand( 'selectAll' ) 
-			execCommand( 'copy' ) 
-			" 
 		></textarea> 
 <!-- 171205 cameraRename --> 
 
@@ -40,7 +36,9 @@ let outputTime = $ ` #outputTime `
 
 console .log({ inputTime, outputTime }) 
 
-inputTime .onclick = q => { 
+outputTime .onclick = q => { 
+			execCommand( 'selectAll' ) 
+			execCommand( 'copy' ) 
 	
 	} 
 
