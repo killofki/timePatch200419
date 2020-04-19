@@ -257,7 +257,7 @@ inputTime .onclick = evt => {
 function patchTime( text ) { 
 	
 	let matches = text .match( /.*([\n\r]|$)/g ) 
-	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
+	let timeRule = /(?<!\d)(\d\d?):(\d\d?):(\d\d?)(?!\d)/g 
 	
 	let timeSampler = new Date() 
 	
