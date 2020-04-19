@@ -237,6 +237,7 @@ patchFrom <input
 
 let inputTime = $ ` #inputTime ` 
 let outputTime = $ ` #outputTime ` 
+let patchFrom = $ ` #patchFrom ` 
 
 inputTime .onclick = evt => { 
 	let { srcElement } = evt 
@@ -254,17 +255,13 @@ function patchTime( text ) {
 	let matches = text .match( /.*([\n\r]|$)/g ) 
 	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
 	
-	let zero = new Date() 
-	setHHMMSS( zero, 0, 0, 0 ) 
-	let zeroTime = zero .getTime() 
-	
-	let timeIn = new Date() 
+	let zeroTime = getHHMMSS( 0, 0, 0 ) 
 	
 	for ( let line of matches ) { 
 		let founds = line .matchAll( timeRule ) 
 		for ( let found of founds ) { 
 			let [ all, hh, mm, ss ] = found 
-			setHHMMSS( timeIn, hh, mm, ss ) 
+			let foundTime = getHHMMSS( hh, mm, ss ) 
 			console .log({ timeIn, hh, mm, ss }) 
 			} // -- for of founds 
 		} // -- for of matches 
@@ -272,13 +269,26 @@ function patchTime( text ) {
 	return matches 
 	} // -- patchTime() 
 
+function getHHMMSS( hh, mm, ss ) { 
+	let timeCatcher = new Date() 
+	getHHMMSS = ( hh, mm, ss ) => { 
+		timeCatcher .setHours( hh ) 
+		timeCatcher .setMinutes( mm ) 
+		timeCatcher .setSeconds( ss ) 
+		timeCatcher .setMilliseconds `00` 
+		
+		return timeCatcher .getTime() 
+		} // -- getHHMMSS // redefine 
+	reteurn getHHMMSS( hh, mm, ss ) // lazy 
+	} // -- getHHMMSS() 
+
 function setHHMMSS( date, hh, mm, ss ) { 
 	date .setHours( hh ) 
 	date .setMinutes( mm ) 
 	date .setSeconds( ss ) 
 	date .setMilliseconds `00` 
 	return date 
-	} // -- setHHMMSS 
+	} // -- setHHMMSS() 
 
 /// 
 } 
