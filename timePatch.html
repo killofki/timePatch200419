@@ -240,9 +240,7 @@ function patchTime( text ) {
 	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
 	
 	let now = new Date() 
-	console .log( now ) 
 	setHHMMSS( now, 0, 0, 0 ) 
-	console .log( now ) 
 	
 	return // 
 	
@@ -259,13 +257,9 @@ function patchTime( text ) {
 
 function setHHMMSS( date, hh, mm, ss ) { 
 	date .setHours( hh ) 
-	console .log( date, hh ) 
 	date .setMinutes( mm ) 
-	console .log( date ) 
 	date .setSeconds( ss ) 
-	console .log( date ) 
 	date .setMilliseconds `00` 
-	console .log( date ) 
 	return date 
 	} // -- setHHMMSS 
 
