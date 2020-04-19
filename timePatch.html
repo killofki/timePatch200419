@@ -221,7 +221,7 @@ low latency mode
 <br /> 
 patchFrom <input 
 		type="text" 
-		value="00:00:00" 
+		vvalue="00:00:00" 
 		id="patchFrom" 
 		onclick=" 
 			execCommand( 'selectAll' ) 
@@ -238,6 +238,8 @@ patchFrom <input
 let inputTime = $ ` #inputTime ` 
 let outputTime = $ ` #outputTime ` 
 let patchFrom = $ ` #patchFrom ` 
+
+patchFrom .value = HHMMSS( getHHMMSS( 0, 0, 0 ) ) 
 
 inputTime .onclick = evt => { 
 	let { srcElement } = evt 
