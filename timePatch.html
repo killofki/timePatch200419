@@ -239,15 +239,18 @@ function patchTime( text ) {
 	let matches = text .match( /.*([\n\r]|$)/g ) 
 	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
 	
-	let now = new Date() 
-	setHHMMSS( now, 0, 0, 0 ) 
-	let zeroTime = now .getTime() 
+	let zero = new Date() 
+	setHHMMSS( zero, 0, 0, 0 ) 
+	let zeroTime = zero .getTime() 
+	
+	let timeIn = new Date() 
 	
 	for ( let line of matches ) { 
 		let founds = line .matchAll( timeRule ) 
 		for ( let found of founds ) { 
 			let [ all, hh, mm, ss ] = found 
-			console .log({ hh, mm, ss, all }) 
+			setHHMMSS( timeIn, hh, mm, ss ) 
+			console .log({ timeIn, hh, mm, ss }) 
 			} // -- for of founds 
 		} // -- for of matches 
 	
