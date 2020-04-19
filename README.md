@@ -1,7 +1,7 @@
 # timePatch200419
 patch time from start of video 
 
-https://www.twitch.tv/videos/596534122 
+https://youtu.be/9BoJV2sTSgw (- https://www.twitch.tv/videos/596534122 -) 
 
 <br/> 
 
