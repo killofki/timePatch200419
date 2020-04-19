@@ -264,8 +264,8 @@ function patchTime( text ) {
 			let [ all, hh, mm, ss ] = found 
 			let foundTime = getHHMMSS( hh, mm, ss ) 
 			timeSampler .setTime( foundTime ) 
-			console .log( `${ timeSampler }`, { hh, mm, ss } ) 
-			HHMMSS( timeSampler ) 
+			console .log( HHMMSS( timeSampler ), { hh, mm, ss } ) 
+			
 			} // -- for of founds 
 		} // -- for of matches 
 	
@@ -292,7 +292,9 @@ function HHMMSS( time ) {
 		let h = timeSampler .getHours() 
 		let m = timeSampler .getMinutes() 
 		let s = timeSampler .getSeconds() 
-		console .log( h, m, s ) 
+		let [ hh, mm, ss ] = [ h, m, s ] .map( n => `00${ n }` .slice( -2 ) ) 
+		
+		return `${ hh }:${ mm }:${ ss }` 
 		} // -- HHMMSS // redefine 
 	return HHMMSS( time ) // lazy 
 	} // -- HHMMSS 
