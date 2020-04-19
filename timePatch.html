@@ -230,9 +230,20 @@ inputTime .onclick = evt => {
 	let { srcElement } = evt 
 	let { value } = srcElement 
 	
-	let matches = value .match( /.*([\n\r]|$)/g ) 
-	console .log( matches ) 
+	let patches = patchTime( value ) 
+	console .log( patches ) 
+	
+	
 	} // -- inputTime .onclick 
+
+// .. functions .. 
+
+function patchTime( text ) { 
+	
+	let matches = text .match( /.*([\n\r]|$)/g ) 
+	
+	return matches 
+	} // -- patchTime() 
 
 /// 
 } 
