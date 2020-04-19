@@ -24,7 +24,6 @@ textarea#outputTime {
 <textarea 
 		id="outputTime" 
 		></textarea> 
-<!-- 171205 cameraRename --> 
 
 <script> 
 
@@ -37,9 +36,9 @@ let outputTime = $ ` #outputTime `
 console .log({ inputTime, outputTime }) 
 
 outputTime .onclick = q => { 
-			execCommand( 'selectAll' ) 
-			execCommand( 'copy' ) 
-	
+	execCommand( 'selectAll' ) 
+	execCommand( 'copy' ) 
+	// <!-- 171205 cameraRename --> 
 	} 
 
 /// 
