@@ -256,13 +256,15 @@ function patchTime( text ) {
 	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
 	
 	let zeroTime = getHHMMSS( 0, 0, 0 ) 
+	let timeSampler = new Date() 
 	
 	for ( let line of matches ) { 
 		let founds = line .matchAll( timeRule ) 
 		for ( let found of founds ) { 
 			let [ all, hh, mm, ss ] = found 
 			let foundTime = getHHMMSS( hh, mm, ss ) 
-			console .log({ timeIn, hh, mm, ss }) 
+			timeSampler .setTime( foundTime ) 
+			console .log( `${ timeSampler }`, { hh, mm, ss } ) 
 			} // -- for of founds 
 		} // -- for of matches 
 	
@@ -279,7 +281,7 @@ function getHHMMSS( hh, mm, ss ) {
 		
 		return timeCatcher .getTime() 
 		} // -- getHHMMSS // redefine 
-	reteurn getHHMMSS( hh, mm, ss ) // lazy 
+	return getHHMMSS( hh, mm, ss ) // lazy 
 	} // -- getHHMMSS() 
 
 function setHHMMSS( date, hh, mm, ss ) { 
