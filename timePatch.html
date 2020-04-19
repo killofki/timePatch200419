@@ -223,16 +223,12 @@ low latency mode
 let inputTime = $ ` #inputTime ` 
 let outputTime = $ ` #outputTime ` 
 
-console .log({ inputTime, outputTime }) 
-
 inputTime .onclick = evt => { 
-	console .log( evt ) 
 	let { srcElement } = evt 
 	let { value } = srcElement 
 	
 	let patches = patchTime( value ) 
-	console .log( patches ) 
-	
+	// console .log( patches ) 	
 	
 	} // -- inputTime .onclick 
 
@@ -241,6 +237,15 @@ inputTime .onclick = evt => {
 function patchTime( text ) { 
 	
 	let matches = text .match( /.*([\n\r]|$)/g ) 
+	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
+	
+	for ( let line of matches ) { 
+		let founds = line .matchAll( timeRule ) 
+		for ( let found of founds ) { 
+			let [ all, hh, mm, ss ] = found 
+			console .log({ hh, mm, ss, all }) 
+			} // -- for of founds 
+		} // -- for of matches 
 	
 	return matches 
 	} // -- patchTime() 
