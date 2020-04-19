@@ -239,7 +239,9 @@ let inputTime = $ ` #inputTime `
 let outputTime = $ ` #outputTime ` 
 let patchFrom = $ ` #patchFrom ` 
 
-patchFrom .value = HHMMSS( getHHMMSS( 0, 0, 0 ) ) 
+let zeroTime = getHHMMSS( 0, 0, 0 ) 
+
+patchFrom .value = HHMMSS( zeroTime ) 
 
 inputTime .onclick = evt => { 
 	let { srcElement } = evt 
@@ -257,7 +259,6 @@ function patchTime( text ) {
 	let matches = text .match( /.*([\n\r]|$)/g ) 
 	let timeRule = /(?<!\d)(\d\d):(\d\d):(\d\d)(?!\d)/g 
 	
-	let zeroTime = getHHMMSS( 0, 0, 0 ) 
 	let timeSampler = new Date() 
 	
 	for ( let line of matches ) { 
