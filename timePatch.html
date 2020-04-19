@@ -265,6 +265,7 @@ function patchTime( text ) {
 			let foundTime = getHHMMSS( hh, mm, ss ) 
 			timeSampler .setTime( foundTime ) 
 			console .log( `${ timeSampler }`, { hh, mm, ss } ) 
+			HHMMSS( timeSampler ) 
 			} // -- for of founds 
 		} // -- for of matches 
 	
@@ -283,6 +284,18 @@ function getHHMMSS( hh, mm, ss ) {
 		} // -- getHHMMSS // redefine 
 	return getHHMMSS( hh, mm, ss ) // lazy 
 	} // -- getHHMMSS() 
+
+function HHMMSS( time ) { 
+	let timeSampler = new Date() 
+	HHMMSS = time => { 
+		timeSampler .setTime( time ) 
+		let h = timeSampler .getHours() 
+		let m = timeSampler .getMinutes() 
+		let s = timeSampler .getSeconds() 
+		console .log( h, m, s ) 
+		} // -- HHMMSS // redefine 
+	return HHMMSS( time ) // lazy 
+	} // -- HHMMSS 
 
 /// 
 } 
