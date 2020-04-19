@@ -1,0 +1,149 @@
+<!doctype html > 
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	</head> 
+<body> 
+
+<style> 
+textarea { 
+	width : 500px; 
+	height : 200px; 
+	} 
+textarea#inputTime { 
+	} 
+textarea#outputTime { 
+	background-color : #eeeeee; 
+	} 
+input#patchFrom { 
+	width : 80px; 
+	padding-left : 5px; 
+	padding-right : 5px; 
+	} 
+	</style> 
+
+<textarea 
+		id="inputTime" 
+		>
+00:00:00 
+</textarea> 
+
+<textarea 
+		id="outputTime" 
+		onclick=" 
+			execCommand( 'selectAll' ) 
+			execCommand( 'copy' ) 
+			" 
+		></textarea> 
+<br /> 
+patchFrom <input 
+		type="text" 
+		value="" 
+		id="patchFrom" 
+		onclick=" 
+			this .value = setFrom( this .value ) 
+			execCommand( 'selectAll' ) 
+			" 
+		/> 
+<span id="fromValue" ></span> 
+<!-- 171205 cameraRename --> 
+
+<script> 
+
+{ 
+/// 
+
+let inputTime = $ ` #inputTime ` 
+let outputTime = $ ` #outputTime ` 
+let patchFrom = $ ` #patchFrom ` 
+let fromValue = $ ` #fromValue ` 
+
+let zeroTime = getHHMMSS( 0, 0, 0 ) 
+
+let fromTime = zeroTime 
+patchFrom .value = HHMMSS( fromTime ) 
+
+let timeRule = /(?<!\d)(\d\d?):(\d\d?):(\d\d?)(?!\d)/g 
+
+inputTime .onclick = evt => { 
+	let { srcElement } = evt 
+	let { value } = srcElement 
+	
+	let patches = patchTime( value ) 
+	// console .log( patches ) 	
+	
+	} // -- inputTime .onclick 
+
+// .. functions .. 
+
+function setFrom( text ) { 
+	let matched = text .matchAll( timeRule ) 
+	let [[ all, hh, mm, ss ]] = matched 
+	
+	fromTime = getHHMMSS( hh, mm, ss ) 
+	
+	fromValue .innerHTML = HHMMSS( fromTime ) 
+	
+	return fromValue .innerHTML 
+	} // -- setFrom() 
+
+function patchTime( text ) { 
+	let patched = text .replace( timeRule, ( all, hh, mm, ss ) => { 
+		let foundTime = getHHMMSS( hh, mm, ss ) 
+		let patchedTime = zeroTime + foundTime - fromTime 
+		
+		return HHMMSS( patchedTime ) 
+		} ) 
+	outputTime .value = patched 
+	
+	let matches = text .match( /.*([\n\r]|$)/g ) 
+	for ( let line of matches ) { 
+		let founds = line .matchAll( timeRule ) 
+		for ( let found of founds ) { 
+			let [ all, hh, mm, ss ] = found 
+			let foundTime = getHHMMSS( hh, mm, ss ) 
+			console .log( HHMMSS( foundTime ), { hh, mm, ss } ) 
+			
+			} // -- for of founds 
+		} // -- for of matches 
+	
+	return matches 
+	} // -- patchTime() 
+
+function getHHMMSS( hh, mm, ss ) { 
+	let timeCatcher = new Date() 
+	getHHMMSS = ( hh, mm, ss ) => { 
+		timeCatcher .setHours( hh ) 
+		timeCatcher .setMinutes( mm ) 
+		timeCatcher .setSeconds( ss ) 
+		timeCatcher .setMilliseconds `00` 
+		
+		return timeCatcher .getTime() 
+		} // -- getHHMMSS // redefine 
+	return getHHMMSS( hh, mm, ss ) // lazy 
+	} // -- getHHMMSS() 
+
+function HHMMSS( time ) { 
+	// did not minus time 
+	let timeSampler = new Date() 
+	HHMMSS = time => { 
+		timeSampler .setTime( time ) 
+		let h = timeSampler .getHours() 
+		let m = timeSampler .getMinutes() 
+		let s = timeSampler .getSeconds() 
+		let [ hh, mm, ss ] = [ h, m, s ] .map( n => `00${ n }` .slice( -2 ) ) 
+		
+		return `${ hh }:${ mm }:${ ss }` 
+		} // -- HHMMSS // redefine 
+	return HHMMSS( time ) // lazy 
+	} // -- HHMMSS 
+
+/// 
+} 
+
+function $( q ) { return document .querySelector( q ) } 
+
+	</script> 
+
+	</body> 
+	</html> 
