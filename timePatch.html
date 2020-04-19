@@ -255,19 +255,15 @@ inputTime .onclick = evt => {
 // .. functions .. 
 
 function patchTime( text ) { 
-	
-	let matches = text .match( /.*([\n\r]|$)/g ) 
 	let timeRule = /(?<!\d)(\d\d?):(\d\d?):(\d\d?)(?!\d)/g 
 	
-	let timeSampler = new Date() 
-	
+	let matches = text .match( /.*([\n\r]|$)/g ) 
 	for ( let line of matches ) { 
 		let founds = line .matchAll( timeRule ) 
 		for ( let found of founds ) { 
 			let [ all, hh, mm, ss ] = found 
 			let foundTime = getHHMMSS( hh, mm, ss ) 
-			timeSampler .setTime( foundTime ) 
-			console .log( HHMMSS( timeSampler ), { hh, mm, ss } ) 
+			console .log( HHMMSS( foundTime ), { hh, mm, ss } ) 
 			
 			} // -- for of founds 
 		} // -- for of matches 
